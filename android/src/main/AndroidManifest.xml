@@ -1,4 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.reactlibrary">
-
+    <application>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.reactlibrary.devicelogreport.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths">
+            </meta-data>
+        </provider>
+    </application>
 </manifest>
