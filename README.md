@@ -1,2 +1,17 @@
 # react-native-device-log-report
-Gather and send device log in real devices
+
+## Getting started
+
+`$ npm install react-native-device-log-report --save`
+
+### Mostly automatic installation
+
+`$ react-native link react-native-device-log-report`
+
+## Usage
+```javascript
+import DeviceLogReport from 'react-native-device-log-report';
+
+// TODO: What to do with the module?
+DeviceLogReport;
+```
