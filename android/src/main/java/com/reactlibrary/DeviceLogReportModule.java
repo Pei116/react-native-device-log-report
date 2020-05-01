@@ -1,9 +1,21 @@
 package com.reactlibrary;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
+
+import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
+
+import java.io.File;
+import java.io.IOException;
 
 public class DeviceLogReportModule extends ReactContextBaseJavaModule
     implements ActivityEventListener {
@@ -65,17 +77,11 @@ public class DeviceLogReportModule extends ReactContextBaseJavaModule
     }
 
     private File generateLog() throws IOException {
-//            File logDir = new File(Environment.getExternalStorageDirectory(), "logs");
-//            if (!logDir.exists()) {
-//                logDir.mkdir();
-//            }
-//            String filename = "device_log_" + new Date().getTime() + ".log";
-//            File logFile = new File(logDir, filename);
-            File logFile = File.createTempFile("device-log-", ".log", reactContext.getCacheDir());
-            String[] cmd = new String[] { "logcat", "-f", logFile.getAbsolutePath(), "-v", "time", "*:*" };
-            Runtime.getRuntime().exec(cmd);
-            Toast.makeText(reactContext, "Device log generated", Toast.LENGTH_SHORT).show();
-            return logFile;
+        File logFile = File.createTempFile("device-log-", ".log", reactContext.getCacheDir());
+        String[] cmd = new String[] { "logcat", "-f", logFile.getAbsolutePath(), "-v", "time", "*:*" };
+        Runtime.getRuntime().exec(cmd);
+        Toast.makeText(reactContext, "Device log generated", Toast.LENGTH_SHORT).show();
+        return logFile;
     }
 
     private String getDeviceInfo() {
